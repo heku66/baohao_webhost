@@ -9,7 +9,7 @@ def send_pushplus_message(message):
         "token": token,
         "title": "Webhostmost保活通知",
         "content": message,
-        "template": "Markdown"
+        "template": "markdown"
     }
     response = requests.post(url, json=payload)
     return response.json()
