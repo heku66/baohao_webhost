@@ -3,12 +3,12 @@ import os
 import requests
 
 
-def send_pushplus_message(message, title):
+def send_pushplus_message(message):
     token = os.environ.get('PUSHPLUS_TOKEN')
     url = "http://www.pushplus.plus/send"
     payload = {
         "token": token,
-        "title": title,
+        "title": "Webhostmost保活通知",
         "content": message,
         "template": "Markdown"
     }
