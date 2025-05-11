@@ -2,12 +2,12 @@ from playwright.sync_api import sync_playwright
 import os
 import requests
 
-def send_pushplus_message(message, title):
+def send_pushplus_message(message):
     token = os.environ.get('PUSHPLUS_TOKEN')
     url = "http://www.pushplus.plus/send"
     payload = {
         "token": token,
-        "title": title,
+        "title": "Webhostmost保活通知",
         "content": message,
         "template": "Markdown"
     }
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     if login_statuses:
         message = "WEBHOST登录状态:\n\n" + "\n".join(login_statuses)
-        result = send_pushplus_message(message,"Webhostmost保活通知")
+        result = send_pushplus_message(message)
         print("消息已发送到PushPlus:", result)
     else:
         error_message = "没有配置任何账号"
