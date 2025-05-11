@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 import os
 import requests
 
-def send_pushplus_message(message, title="Webhostmost保活通知"):
+def send_pushplus_message(message, title):
     token = os.environ.get('PUSHPLUS_TOKEN')
     url = "http://www.pushplus.plus/send"
     payload = {
@@ -72,8 +72,8 @@ if __name__ == "__main__":
 
     if login_statuses:
         message = "WEBHOST登录状态:\n\n" + "\n".join(login_statuses)
-        result = send_pushplus_message(message)
-        print("消息已发送到Telegram:", result)
+        result = send_pushplus_message(message,"Webhostmost保活通知")
+        print("消息已发送到PushPlus:", result)
     else:
         error_message = "没有配置任何账号"
         send_pushplus_message(error_message)
