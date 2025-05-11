@@ -71,7 +71,7 @@ if __name__ == "__main__":
         print(status)
 
     if login_statuses:
-        message = "WEBHOST登录状态:\n\n" + "\n".join(login_statuses)
+        message = "# WEBHOST登录状态:\n\n" + "\n".join(f"- {s}" for s in login_statuses)
         result = send_pushplus_message(message)
         print("消息已发送到PushPlus:", result)
     else:
