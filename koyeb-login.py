@@ -2,6 +2,19 @@ from playwright.sync_api import sync_playwright
 import os
 import requests
 
+
+def send_pushplus_message(message, title):
+    token = os.environ.get('PUSHPLUS_TOKEN')
+    url = "http://www.pushplus.plus/send"
+    payload = {
+        "token": token,
+        "title": title,
+        "content": message,
+        "template": "Markdown"
+    }
+    response = requests.post(url, json=payload)
+    return response.json()
+
 def send_telegram_message(message):
     bot_token = os.environ.get('TEL_TOK')
     chat_id = os.environ.get('TEL_ID')
@@ -58,9 +71,9 @@ if __name__ == "__main__":
 
     if login_statuses:
         message = "Koyeb登录状态:\n\n" + "\n".join(login_statuses)
-        result = send_telegram_message(message)
-        print("消息已发送到Telegram:", result)
+        result = send_pushplus_message(message)
+        print("消息已发送到PushPlus:", result)
     else:
         error_message = "没有配置任何账号"
-        send_telegram_message(error_message)
+        send_pushplus_message(error_message)
         print(error_message)
